@@ -20,26 +20,9 @@
 </html>
 
 <script>
-  const https = require('https');
-  function request(url, callback) {
-    https.get(url, (res) => {
-      if (res.statusCode !== 200) {
-        res.resume();
-        return null;
-      }
-
-      let data = '';
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      res.on('close', () => {
-        callback(data);
-      });
-    });
-  }
   
-  request('https://Mort-ou-pas-mort-API.samuelboucher1.repl.co/questionAPI?topic=mort', res=>{
+  fetch('https://Mort-ou-pas-mort-API.samuelboucher1.repl.co/questionAPI?topic=mort')
+    .then(res=>{
     document.getElementById('personne').value=JSON.parse(res)[1];
   })
   
