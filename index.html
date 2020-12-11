@@ -23,6 +23,7 @@
   
   fetch('https://Mort-ou-pas-mort-API.samuelboucher1.repl.co/questionAPI?topic=mort')
     .then(res=>{
+    console.log(res);
     document.getElementById('personne').value=JSON.parse(res);
   })
   
