@@ -11,21 +11,18 @@
     <title>Mort ou pas mort?</title>
   </head>
   <body>
-    <h1 id=personne>Hello, world!</h1>
-
+    <div style='text-align:center;'>
+    <h1 id=personne></h1>
+    <button type="button" class="btn btn-success" id='OK' hidden>Pas mort</button>
+    <button type="button" class="btn btn-danger" id='NOK' hidden>Mort</button>
+    <h1 id=reponse></h1>
+    <h2 id=complement></h2>
+    <button type="button" class="btn btn-primary" id='suivant' hidden>Suivant</button>
+    </div>
+  </body>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
-  </body>
+    <script src='index.js'></script>
 </html>
 
-<script>
-  
-  fetch('https://Mort-ou-pas-mort-API.samuelboucher1.repl.co/questionAPI?topic=mort')
-    .then(res=> return res.blob())
-    .then(myBlob=>{
-    console.log(myBlob);
-    document.getElementById('personne').value=JSON.parse(res);
-  })
-  
-</script>
+
