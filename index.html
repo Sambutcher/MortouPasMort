@@ -1,29 +1,42 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <title>Mort ou pas mort ?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header><h1>Mort ou pas mort&nbsp;?</h1></header>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <section id="card" aria-live="polite">
+      <div id="photo-wrap">
+        <img id="photo" alt="">
+        <div id="no-photo" hidden>?</div>
+      </div>
+      <h2 id="name"></h2>
+      <p id="description"></p>
+    </section>
 
-    <title>Mort ou pas mort?</title>
-  </head>
-  <body>
-    <div style='text-align:center;'>
-    <h1 id=personne></h1>
-    <button type="button" class="btn btn-success" id='OK' hidden>Pas mort</button>
-    <button type="button" class="btn btn-danger" id='NOK' hidden>Mort</button>
-    <h1 id=reponse></h1>
-    <h2 id=complement></h2>
-    <h3 id=score hidden>Score: <span id=scoreValue></span></h3>
-    <button type="button" class="btn btn-primary" id='suivant' hidden>Suivant</button>
-    </div>
-  </body>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src='index.js'></script>
+    <section id="result" hidden aria-live="polite">
+      <p id="verdict"></p>
+      <p id="detail"></p>
+    </section>
+
+    <p id="error" hidden></p>
+
+    <footer id="actions">
+      <div id="choices">
+        <button id="btn-dead" class="choice dead" type="button">Mort</button>
+        <button id="btn-alive" class="choice alive" type="button">Pas mort</button>
+      </div>
+      <button id="btn-next" class="next" type="button" hidden>Suivant</button>
+    </footer>
+
+    <p id="credits">Données&nbsp;: <a href="https://www.wikidata.org" target="_blank" rel="noopener">Wikidata</a>, photos&nbsp;: Wikimedia Commons</p>
+  </main>
+  <script src="game.js"></script>
+</body>
 </html>
-
-

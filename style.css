@@ -1,0 +1,145 @@
+:root {
+  --bg: #111;
+  --fg: #f4f1ea;
+  --muted: #a9a49a;
+  --dead: #c0392b;
+  --alive: #27ae60;
+  --next: #f4f1ea;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+}
+
+header h1 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  text-align: center;
+  letter-spacing: .02em;
+}
+
+#card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#photo-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 52dvh;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(1);
+  transition: filter .4s;
+}
+
+#photo.revealed { filter: none; }
+
+#no-photo {
+  font-size: 6rem;
+  color: #444;
+}
+
+#name {
+  margin: 14px 0 4px;
+  font-size: 1.6rem;
+}
+
+#description {
+  margin: 0;
+  color: var(--muted);
+  min-height: 1.3em;
+}
+
+#result {
+  text-align: center;
+  margin: 12px 0 4px;
+}
+
+#verdict {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+#verdict.good { color: var(--alive); }
+#verdict.bad { color: var(--dead); }
+
+#detail {
+  margin: 4px 0 0;
+  font-size: 1.1rem;
+}
+
+#error {
+  text-align: center;
+  color: #e67e22;
+}
+
+#actions { margin-top: 12px; }
+
+#choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+button {
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: 14px;
+  padding: 18px 0;
+  width: 100%;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:disabled { opacity: .45; cursor: default; }
+
+.choice.dead { background: var(--dead); color: #fff; }
+.choice.alive { background: var(--alive); color: #fff; }
+.choice.picked { outline: 3px solid var(--fg); outline-offset: 2px; opacity: 1; }
+.next { background: var(--next); color: var(--bg); }
+
+#credits {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+#credits a { color: inherit; }
+
+.loading #photo, .loading #name, .loading #description { opacity: .3; }
