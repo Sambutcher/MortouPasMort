@@ -1,0 +1,29 @@
+name: Mise à jour de la liste des personnes
+
+on:
+  schedule:
+    - cron: '0 4 * * 1' # chaque lundi à 4 h UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/update-people.mjs
+      - name: Commit si la liste a changé
+        run: |
+          if git diff --quiet data/people.json; then
+            echo "Aucun changement"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Mise à jour hebdomadaire de la liste des personnes"
+          git push
