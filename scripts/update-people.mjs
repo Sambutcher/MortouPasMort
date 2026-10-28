@@ -14,17 +14,20 @@ const KEEP = 500;         // taille finale de la liste
 const CONCURRENCY = 2;    // l'API pageviews renvoie des 429 au-delà de quelques requêtes en parallèle
 const MAX_MISSING = 0.1;  // part maximale de personnes sans nombre de vues avant d'abandonner
 
-const QUERY = `
-SELECT ?person ?personLabel ?article ?sitelinks WHERE {
+// Une requête par décennie : la requête sur 1900-1960 d'un coup dépasse parfois
+// les 60 s de Wikidata, qui renvoie alors un JSON tronqué.
+const query = (from, to) => `
+SELECT ?person ?personLabel ?article WHERE {
   ?person wdt:P31 wd:Q5;
           wdt:P27 wd:Q142;
           wdt:P569 ?birth;
           wikibase:sitelinks ?sitelinks.
   FILTER(?sitelinks >= ${MIN_SITELINKS})
-  FILTER(?birth >= "1900-01-01"^^xsd:dateTime && ?birth < "1961-01-01"^^xsd:dateTime)
+  FILTER(?birth >= "${from}-01-01"^^xsd:dateTime && ?birth < "${to}-01-01"^^xsd:dateTime)
   ?article schema:about ?person;
            schema:isPartOf <https://fr.wikipedia.org/>.
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr". }
+  ?person rdfs:label ?personLabel.
+  FILTER(LANG(?personLabel) = "fr")
 }`;
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -32,9 +35,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function getJson(url) {
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, Accept: 'application/json' } });
-    if (res.ok) return res.json();
+    let error = `${res.status}`;
+    if (res.ok) {
+      // En cas de délai dépassé, Wikidata répond 200 avec un JSON coupé suivi d'une trace Java
+      try { return JSON.parse(await res.text()); } catch { error = 'JSON invalide'; }
+    }
     if (res.status === 404) return null;
-    if (attempt >= 6) throw new Error(`${res.status} ${url}`);
+    if (attempt >= 6) throw new Error(`${error} ${url}`);
     // Respecte Retry-After si le serveur l'indique, sinon attente exponentielle (2 s, 4 s, 8 s…)
     const retryAfter = Number(res.headers.get('retry-after'));
     await sleep(retryAfter > 0 ? retryAfter * 1000 : Math.min(2000 * 2 ** (attempt - 1), 60000));
@@ -42,14 +49,15 @@ async function getJson(url) {
 }
 
 async function fetchCandidates() {
-  const url = 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(QUERY);
-  const data = await getJson(url);
   const byId = new Map();
-  for (const row of data.results.bindings) {
-    const id = row.person.value.split('/').pop();
-    const name = row.personLabel.value;
-    if (name === id) continue; // pas de libellé français
-    byId.set(id, { id, name, title: decodeURIComponent(row.article.value.split('/wiki/').pop()) });
+  for (let from = 1900; from < 1961; from += 10) {
+    const url = 'https://query.wikidata.org/sparql?format=json&query='
+      + encodeURIComponent(query(from, Math.min(from + 10, 1961)));
+    const data = await getJson(url);
+    for (const row of data.results.bindings) {
+      const id = row.person.value.split('/').pop();
+      byId.set(id, { id, name: row.personLabel.value, title: decodeURIComponent(row.article.value.split('/wiki/').pop()) });
+    }
   }
   return [...byId.values()];
 }
