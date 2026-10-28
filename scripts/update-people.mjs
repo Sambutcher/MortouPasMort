@@ -1,5 +1,8 @@
-// Régénère data/people.json : les personnalités françaises les plus consultées
-// sur Wikipédia FR, nées entre 1900 et 1960 (donc mortes ou susceptibles de l'être).
+// Régénère data/people.json : les personnalités les plus consultées sur Wikipédia FR,
+// nées entre 1900 et 1960 (donc mortes ou susceptibles de l'être). Les Français sont
+// retenus dès une notoriété modeste, les étrangers seulement s'ils sont très connus
+// dans le monde ; le classement final se fait sur les vues de Wikipédia FR, c'est donc
+// la notoriété en France qui décide.
 // Seuls l'identifiant Wikidata et le nom sont stockés : le jeu lit « mort ou pas »
 // en direct sur Wikidata à chaque question.
 //
@@ -9,20 +12,22 @@ import { writeFile } from 'node:fs/promises';
 
 const OUTPUT = new URL('../data/people.json', import.meta.url);
 const USER_AGENT = 'MortOuPasMort/1.0 (https://github.com/Sambutcher/MortouPasMort)';
-const MIN_SITELINKS = 25; // filtre grossier de notoriété avant de compter les vues
-const KEEP = 500;         // taille finale de la liste
+const MIN_SITELINKS = 25;      // filtre grossier de notoriété (Français) avant de compter les vues
+const MIN_SITELINKS_INTL = 80; // idem pour les autres nationalités, bien plus nombreuses
+const KEEP = 800;              // taille finale de la liste
 const CONCURRENCY = 2;    // l'API pageviews renvoie des 429 au-delà de quelques requêtes en parallèle
 const MAX_MISSING = 0.1;  // part maximale de personnes sans nombre de vues avant d'abandonner
 
-// Une requête par décennie : la requête sur 1900-1960 d'un coup dépasse parfois
-// les 60 s de Wikidata, qui renvoie alors un JSON tronqué.
-const query = (from, to) => `
+// Une requête par tranche de naissances : la requête sur 1900-1960 d'un coup dépasse
+// parfois les 60 s de Wikidata, qui renvoie alors un JSON tronqué. Sans filtre de
+// nationalité, il y a bien plus de personnes à parcourir : tranches de 5 ans.
+const query = (from, to, { french }) => `
 SELECT ?person ?personLabel ?article WHERE {
   ?person wdt:P31 wd:Q5;
-          wdt:P27 wd:Q142;
+          ${french ? 'wdt:P27 wd:Q142;' : ''}
           wdt:P569 ?birth;
           wikibase:sitelinks ?sitelinks.
-  FILTER(?sitelinks >= ${MIN_SITELINKS})
+  FILTER(?sitelinks >= ${french ? MIN_SITELINKS : MIN_SITELINKS_INTL})
   FILTER(?birth >= "${from}-01-01"^^xsd:dateTime && ?birth < "${to}-01-01"^^xsd:dateTime)
   ?article schema:about ?person;
            schema:isPartOf <https://fr.wikipedia.org/>.
@@ -50,14 +55,18 @@ async function getJson(url) {
 
 async function fetchCandidates() {
   const byId = new Map();
-  for (let from = 1900; from < 1961; from += 10) {
-    const url = 'https://query.wikidata.org/sparql?format=json&query='
-      + encodeURIComponent(query(from, Math.min(from + 10, 1961)));
-    const data = await getJson(url);
-    for (const row of data.results.bindings) {
-      const id = row.person.value.split('/').pop();
-      byId.set(id, { id, name: row.personLabel.value, title: decodeURIComponent(row.article.value.split('/wiki/').pop()) });
+  const passes = [{ french: true, step: 10 }, { french: false, step: 5 }];
+  for (const { french, step } of passes) {
+    for (let from = 1900; from < 1961; from += step) {
+      const url = 'https://query.wikidata.org/sparql?format=json&query='
+        + encodeURIComponent(query(from, Math.min(from + step, 1961), { french }));
+      const data = await getJson(url);
+      for (const row of data.results.bindings) {
+        const id = row.person.value.split('/').pop();
+        byId.set(id, { id, name: row.personLabel.value, title: decodeURIComponent(row.article.value.split('/wiki/').pop()) });
+      }
     }
+    console.log(`${byId.size} candidats après la passe ${french ? 'Français' : 'international'}`);
   }
   return [...byId.values()];
 }
