@@ -2,24 +2,15 @@
 
 Généré par `scripts/update-convicts.mjs`. Liste source : `data/convicts-source.json` (à modifier à la main).
 
-- Entrées dans la liste source : 147
+- Entrées dans la liste source : 139
 - Gardées dans le jeu : 139 (79 condamnées, 60 non condamnées)
-- Écartées : 8
+- Écartées : 0
 
 Drapeaux : `sensible` = affaire délicate (mœurs, violences, présomption d'innocence) à relire ; `evolutif` = procédure qui peut encore bouger ; `verifier` = fait à confirmer ; `annule` = condamnation annulée, la bonne réponse est « pas condamné ».
 
 ## Écartées (à corriger dans la liste source)
 
-| Personne | Réponse | Validation | Wikidata (P1399) | Drapeaux |
-|---|---|---|---|---|
-| Marion Jones | Condamné | Pas une personne selon Wikidata | — |  |
-| Tiger Woods | Condamné | Non confirmé : ni Wikidata ni Wikipédia FR ne mentionnent de condamnation | — |  |
-| Hugh Grant | Condamné | Non confirmé : ni Wikidata ni Wikipédia FR ne mentionnent de condamnation | — |  |
-| Edward Moore Kennedy | Condamné | Non confirmé : ni Wikidata ni Wikipédia FR ne mentionnent de condamnation | — |  |
-| affaire Seznec | Condamné | Pas une personne selon Wikidata | — |  |
-| Rachida Dati | Pas condamné | Conflit : Wikidata indique une condamnation | Procédure abusive (2025) | evolutif, sensible |
-| affaire Dupont de Ligonnès | Pas condamné | Pas une personne selon Wikidata | — | sensible |
-| Augusto Pinochet | Pas condamné | Conflit : Wikidata indique une condamnation | évasion fiscale |  |
+Aucune.
 
 ## Cas sensibles gardés (à relire)
 
@@ -85,11 +76,12 @@ Drapeaux : `sensible` = affaire délicate (mœurs, violences, présomption d'inn
 - [Emma Goldman](https://www.wikidata.org/wiki/Q79969) (128 wikis)
 - [Russell Crowe](https://www.wikidata.org/wiki/Q129817) (125 wikis)
 - [Mikheil Saakachvili](https://www.wikidata.org/wiki/Q43330) (121 wikis)
+- [Augusto Pinochet](https://www.wikidata.org/wiki/Q368) (120 wikis)
 - [Cristina Fernández de Kirchner](https://www.wikidata.org/wiki/Q40649) (119 wikis)
 - [Ariel Sharon](https://www.wikidata.org/wiki/Q60206) (119 wikis)
 - [Viktor Ianoukovytch](https://www.wikidata.org/wiki/Q1459658) (119 wikis)
-- [Pervez Musharraf](https://www.wikidata.org/wiki/Q40495) (117 wikis)
 - [Marine Le Pen](https://www.wikidata.org/wiki/Q12927) (117 wikis)
+- [Pervez Musharraf](https://www.wikidata.org/wiki/Q40495) (117 wikis)
 - [Liu Xiaobo](https://www.wikidata.org/wiki/Q41617) (117 wikis)
 - [Sheikh Hasina](https://www.wikidata.org/wiki/Q52183) (114 wikis)
 - [Q48259](https://www.wikidata.org/wiki/Q48259) (113 wikis)
@@ -112,8 +104,8 @@ Drapeaux : `sensible` = affaire délicate (mœurs, violences, présomption d'inn
 - [Daniel Ortega](https://www.wikidata.org/wiki/Q57402) (95 wikis)
 - [Adolf Eichmann](https://www.wikidata.org/wiki/Q28085) (94 wikis)
 - [Omar el-Béchir](https://www.wikidata.org/wiki/Q57265) (94 wikis)
-- [Kim Dae-jung](https://www.wikidata.org/wiki/Q45785) (94 wikis)
 - [Q6078](https://www.wikidata.org/wiki/Q6078) (94 wikis)
+- [Kim Dae-jung](https://www.wikidata.org/wiki/Q45785) (94 wikis)
 - [Zulfikar Alî Bhutto](https://www.wikidata.org/wiki/Q131355) (93 wikis)
 - [Radovan Karadžić](https://www.wikidata.org/wiki/Q123923) (92 wikis)
 - [Asif Ali Zardari](https://www.wikidata.org/wiki/Q57373) (92 wikis)
@@ -124,7 +116,6 @@ Drapeaux : `sensible` = affaire délicate (mœurs, violences, présomption d'inn
 - [Anders Behring Breivik](https://www.wikidata.org/wiki/Q44220) (89 wikis)
 - [Evgueni Prigojine](https://www.wikidata.org/wiki/Q20850503) (89 wikis)
 - [Joachim von Ribbentrop](https://www.wikidata.org/wiki/Q101886) (89 wikis)
-- [Karl Dönitz](https://www.wikidata.org/wiki/Q76437) (88 wikis)
 
 ## Toutes les entrées gardées
 
