@@ -143,3 +143,68 @@ button:disabled { opacity: .45; cursor: default; }
 #credits a { color: inherit; }
 
 .loading #photo, .loading #name, .loading #description { opacity: .3; }
+
+/* Écran d'accueil : choix du jeu */
+.home #game-header, .home #card, .home #result, .home #error, .home #actions { display: none !important; }
+body:not(.home) #home { display: none; }
+
+#home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+#home h1 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px;
+  text-align: left;
+  background: #222;
+  color: var(--fg);
+  border: 2px solid #333;
+}
+
+.mode-card[data-mode="condamne"] { border-color: #6b5a2a; }
+
+.mode-title { font-size: 1.3rem; }
+
+.mode-sub {
+  font-size: .95rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+#game-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  margin: 0 0 12px;
+}
+
+#game-header h1 { margin: 0; }
+
+#btn-home {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  background: #222;
+  color: var(--fg);
+}
+
+#source {
+  margin: 6px 0 0;
+  font-size: .85rem;
+}
+
+#source a { color: var(--muted); }

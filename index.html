@@ -14,9 +14,24 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
   <main id="app">
-    <header><h1>Mort ou pas mort&nbsp;?</h1></header>
+    <section id="home">
+      <h1>Quel jeu&nbsp;?</h1>
+      <button class="mode-card" type="button" data-mode="mort">
+        <span class="mode-title">Mort ou pas mort&nbsp;?</span>
+        <span class="mode-sub">Cette personnalité est-elle encore en vie&nbsp;?</span>
+      </button>
+      <button class="mode-card" type="button" data-mode="condamne">
+        <span class="mode-title">Condamné ou pas condamné&nbsp;?</span>
+        <span class="mode-sub">A-t-elle déjà été condamnée par la justice&nbsp;? Seules comptent les condamnations définitives, non annulées.</span>
+      </button>
+    </section>
+
+    <header id="game-header">
+      <button id="btn-home" type="button" aria-label="Changer de jeu">&#8592;</button>
+      <h1 id="title">Mort ou pas mort&nbsp;?</h1>
+    </header>
 
     <section id="card" aria-live="polite">
       <div id="photo-wrap">
@@ -30,6 +45,7 @@
     <section id="result" hidden aria-live="polite">
       <p id="verdict"></p>
       <p id="detail"></p>
+      <p id="source" hidden><a target="_blank" rel="noopener">Source&nbsp;: Wikipédia</a></p>
     </section>
 
     <p id="error" hidden></p>
