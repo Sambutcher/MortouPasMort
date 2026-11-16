@@ -57,7 +57,7 @@ Aucune.
 ## Suggestions : personnes très connues que Wikidata dit condamnées, absentes de la liste
 
 - [Jésus-Christ](https://www.wikidata.org/wiki/Q302) (347 wikis)
-- [Donald Trump](https://www.wikidata.org/wiki/Q22686) (337 wikis)
+- [Donald Trump](https://www.wikidata.org/wiki/Q22686) (338 wikis)
 - [Lénine](https://www.wikidata.org/wiki/Q1394) (297 wikis)
 - [Léon Tolstoï](https://www.wikidata.org/wiki/Q7243) (282 wikis)
 - [Galilée](https://www.wikidata.org/wiki/Q307) (271 wikis)
@@ -80,8 +80,8 @@ Aucune.
 - [Cristina Fernández de Kirchner](https://www.wikidata.org/wiki/Q40649) (119 wikis)
 - [Ariel Sharon](https://www.wikidata.org/wiki/Q60206) (119 wikis)
 - [Viktor Ianoukovytch](https://www.wikidata.org/wiki/Q1459658) (119 wikis)
-- [Marine Le Pen](https://www.wikidata.org/wiki/Q12927) (117 wikis)
 - [Pervez Musharraf](https://www.wikidata.org/wiki/Q40495) (117 wikis)
+- [Marine Le Pen](https://www.wikidata.org/wiki/Q12927) (117 wikis)
 - [Liu Xiaobo](https://www.wikidata.org/wiki/Q41617) (117 wikis)
 - [Sheikh Hasina](https://www.wikidata.org/wiki/Q52183) (114 wikis)
 - [Q48259](https://www.wikidata.org/wiki/Q48259) (113 wikis)
