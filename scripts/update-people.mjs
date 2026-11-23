@@ -19,8 +19,8 @@ const KEEP = 800;              // taille finale de la liste
 const CONCURRENCY = 2;    // l'API pageviews renvoie des 429 au-delà de quelques requêtes en parallèle
 const MAX_MISSING = 0.1;  // part maximale de personnes sans nombre de vues avant d'abandonner
 
-// Une requête par décennie : la requête sur 1900-1960 d'un coup dépasse parfois
-// les 60 s de Wikidata, qui renvoie alors un JSON tronqué.
+// Une requête par tranche de 5 ans : sur une période plus longue, la requête dépasse
+// parfois les 60 s de Wikidata, qui renvoie alors un JSON tronqué (voir frenchRange).
 const frenchQuery = (from, to) => `
 SELECT ?person ?personLabel ?article WHERE {
   ?person wdt:P31 wd:Q5;
@@ -53,7 +53,7 @@ SELECT ?person ?personLabel ?article WHERE {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function getJson(url, options = {}) {
+async function getJson(url, options = {}, maxAttempts = 6) {
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(url, { ...options, headers: { 'User-Agent': USER_AGENT, Accept: 'application/json', ...options.headers } });
     let error = `${res.status}`;
@@ -62,7 +62,7 @@ async function getJson(url, options = {}) {
       try { return JSON.parse(await res.text()); } catch { error = 'JSON invalide'; }
     }
     if (res.status === 404) return null;
-    if (attempt >= 6) throw new Error(`${error} ${url}`);
+    if (attempt >= maxAttempts) throw new Error(`${error} ${url}`);
     // Respecte Retry-After si le serveur l'indique, sinon attente exponentielle (2 s, 4 s, 8 s…)
     const retryAfter = Number(res.headers.get('retry-after'));
     await sleep(retryAfter > 0 ? retryAfter * 1000 : Math.min(2000 * 2 ** (attempt - 1), 60000));
@@ -70,12 +70,25 @@ async function getJson(url, options = {}) {
 }
 
 // POST : avec des centaines de titres, la requête est trop longue pour une URL
-function sparql(query) {
+function sparql(query, maxAttempts) {
   return getJson('https://query.wikidata.org/sparql?format=json', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ query }),
-  });
+  }, maxAttempts);
+}
+
+// Français nés entre `from` (inclus) et `to` (exclu). Si Wikidata dépasse son délai
+// malgré quelques essais, on coupe la période en deux, jusqu'à une seule année.
+async function frenchRange(from, to) {
+  try {
+    return (await sparql(frenchQuery(from, to), to - from > 1 ? 3 : 6)).results.bindings;
+  } catch (err) {
+    if (to - from <= 1) throw err;
+    const mid = Math.floor((from + to) / 2);
+    console.warn(`Délai dépassé sur ${from}-${to - 1}, découpage en ${from}-${mid - 1} et ${mid}-${to - 1}`);
+    return [...await frenchRange(from, mid), ...await frenchRange(mid, to)];
+  }
 }
 
 // Titres des articles passés au moins un jour dans le top 1000 de Wikipédia FR sur un an
@@ -113,8 +126,8 @@ async function fetchCandidates() {
     }
   };
 
-  for (let from = 1900; from < 1961; from += 10) {
-    add((await sparql(frenchQuery(from, Math.min(from + 10, 1961)))).results.bindings);
+  for (let from = 1900; from < 1961; from += 5) {
+    add(await frenchRange(from, Math.min(from + 5, 1961)));
   }
   console.log(`${byId.size} candidats français`);
 
