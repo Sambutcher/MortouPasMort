@@ -3,14 +3,16 @@
 Généré par `scripts/update-convicts.mjs`. Liste source : `data/convicts-source.json` (à modifier à la main).
 
 - Entrées dans la liste source : 139
-- Gardées dans le jeu : 139 (79 condamnées, 60 non condamnées)
-- Écartées : 0
+- Gardées dans le jeu : 138 (78 condamnées, 60 non condamnées)
+- Écartées : 1
 
 Drapeaux : `sensible` = affaire délicate (mœurs, violences, présomption d'innocence) à relire ; `evolutif` = procédure qui peut encore bouger ; `verifier` = fait à confirmer ; `annule` = condamnation annulée, la bonne réponse est « pas condamné ».
 
 ## Écartées (à corriger dans la liste source)
 
-Aucune.
+| Personne | Réponse | Validation | Wikidata (P1399) | Drapeaux |
+|---|---|---|---|---|
+| Xavier Niel | Condamné | Non confirmé : ni Wikidata ni Wikipédia FR ne mentionnent de condamnation | — | verifier |
 
 ## Cas sensibles gardés (à relire)
 
@@ -47,7 +49,6 @@ Aucune.
 | Benjamin Netanyahou | Pas condamné | Aucune condamnation dans Wikidata | — | evolutif |
 | Bachar el-Assad | Pas condamné | Aucune condamnation dans Wikidata | — | evolutif |
 | Thomas Thévenoud | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — | verifier |
-| Xavier Niel | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — | verifier |
 | Gérard Depardieu | Condamné | Confirmé par Wikidata | agression sexuelle (2025) | sensible, verifier |
 | Karim Benzema | Condamné | Confirmé par Wikidata | extorsion | verifier |
 | Cyril Hanouna | Pas condamné | Aucune condamnation dans Wikidata | — | verifier |
@@ -61,7 +62,7 @@ Aucune.
 - [Lénine](https://www.wikidata.org/wiki/Q1394) (297 wikis)
 - [Léon Tolstoï](https://www.wikidata.org/wiki/Q7243) (282 wikis)
 - [Galilée](https://www.wikidata.org/wiki/Q307) (271 wikis)
-- [Alan Turing](https://www.wikidata.org/wiki/Q7251) (192 wikis)
+- [Alan Turing](https://www.wikidata.org/wiki/Q7251) (193 wikis)
 - [Diego Maradona](https://www.wikidata.org/wiki/Q17515) (176 wikis)
 - [Giordano Bruno](https://www.wikidata.org/wiki/Q36330) (151 wikis)
 - [Benazir Bhutto](https://www.wikidata.org/wiki/Q34413) (150 wikis)
@@ -76,24 +77,24 @@ Aucune.
 - [Emma Goldman](https://www.wikidata.org/wiki/Q79969) (128 wikis)
 - [Russell Crowe](https://www.wikidata.org/wiki/Q129817) (125 wikis)
 - [Mikheil Saakachvili](https://www.wikidata.org/wiki/Q43330) (121 wikis)
+- [Cristina Fernández de Kirchner](https://www.wikidata.org/wiki/Q40649) (120 wikis)
 - [Augusto Pinochet](https://www.wikidata.org/wiki/Q368) (120 wikis)
-- [Cristina Fernández de Kirchner](https://www.wikidata.org/wiki/Q40649) (119 wikis)
 - [Ariel Sharon](https://www.wikidata.org/wiki/Q60206) (119 wikis)
 - [Viktor Ianoukovytch](https://www.wikidata.org/wiki/Q1459658) (119 wikis)
+- [Marine Le Pen](https://www.wikidata.org/wiki/Q12927) (118 wikis)
 - [Pervez Musharraf](https://www.wikidata.org/wiki/Q40495) (117 wikis)
-- [Marine Le Pen](https://www.wikidata.org/wiki/Q12927) (117 wikis)
 - [Liu Xiaobo](https://www.wikidata.org/wiki/Q41617) (117 wikis)
 - [Sheikh Hasina](https://www.wikidata.org/wiki/Q52183) (114 wikis)
 - [Q48259](https://www.wikidata.org/wiki/Q48259) (113 wikis)
 - [Paris Hilton](https://www.wikidata.org/wiki/Q47899) (112 wikis)
 - [Hermann Göring](https://www.wikidata.org/wiki/Q47906) (111 wikis)
 - [Pablo Escobar](https://www.wikidata.org/wiki/Q187447) (110 wikis)
-- [Gotthold Ephraim Lessing](https://www.wikidata.org/wiki/Q34628) (107 wikis)
+- [Gotthold Ephraim Lessing](https://www.wikidata.org/wiki/Q34628) (108 wikis)
 - [Jan Hus](https://www.wikidata.org/wiki/Q43977) (106 wikis)
+- [Park Geun-hye](https://www.wikidata.org/wiki/Q138048) (106 wikis)
 - [George Soros](https://www.wikidata.org/wiki/Q12908) (105 wikis)
-- [Park Geun-hye](https://www.wikidata.org/wiki/Q138048) (104 wikis)
 - [Jacob Zuma](https://www.wikidata.org/wiki/Q57282) (104 wikis)
-- [Imelda Marcos](https://www.wikidata.org/wiki/Q285536) (102 wikis)
+- [Imelda Marcos](https://www.wikidata.org/wiki/Q285536) (103 wikis)
 - [James Brown](https://www.wikidata.org/wiki/Q5950) (100 wikis)
 - [Gavrilo Princip](https://www.wikidata.org/wiki/Q80492) (99 wikis)
 - [Mark Wahlberg](https://www.wikidata.org/wiki/Q164119) (99 wikis)
@@ -101,11 +102,11 @@ Aucune.
 - [Guillaume d'Ockham](https://www.wikidata.org/wiki/Q43936) (98 wikis)
 - [O. Henry](https://www.wikidata.org/wiki/Q172788) (96 wikis)
 - [Charles Manson](https://www.wikidata.org/wiki/Q485508) (95 wikis)
+- [Kim Dae-jung](https://www.wikidata.org/wiki/Q45785) (95 wikis)
 - [Daniel Ortega](https://www.wikidata.org/wiki/Q57402) (95 wikis)
 - [Adolf Eichmann](https://www.wikidata.org/wiki/Q28085) (94 wikis)
 - [Omar el-Béchir](https://www.wikidata.org/wiki/Q57265) (94 wikis)
-- [Kim Dae-jung](https://www.wikidata.org/wiki/Q45785) (94 wikis)
-- [Q6078](https://www.wikidata.org/wiki/Q6078) (94 wikis)
+- [Dr. Dre](https://www.wikidata.org/wiki/Q6078) (94 wikis)
 - [Zulfikar Alî Bhutto](https://www.wikidata.org/wiki/Q131355) (93 wikis)
 - [Radovan Karadžić](https://www.wikidata.org/wiki/Q123923) (92 wikis)
 - [Asif Ali Zardari](https://www.wikidata.org/wiki/Q57373) (92 wikis)
@@ -115,7 +116,7 @@ Aucune.
 - [R. Kelly](https://www.wikidata.org/wiki/Q273055) (90 wikis)
 - [Anders Behring Breivik](https://www.wikidata.org/wiki/Q44220) (89 wikis)
 - [Evgueni Prigojine](https://www.wikidata.org/wiki/Q20850503) (89 wikis)
-- [Joachim von Ribbentrop](https://www.wikidata.org/wiki/Q101886) (89 wikis)
+- [Hideki Tōjō](https://www.wikidata.org/wiki/Q160847) (89 wikis)
 
 ## Toutes les entrées gardées
 
@@ -141,7 +142,6 @@ Aucune.
 | Thomas Thévenoud | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — | verifier |
 | José Bové | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — |  |
 | Jérôme Kerviel | Condamné | Confirmé par Wikidata | fraude électronique |  |
-| Xavier Niel | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — | verifier |
 | François-Marie Banier | Condamné | Confirmé par Wikidata | abus de faiblesse (2016) |  |
 | Patrick Poivre d'Arvor | Condamné | Confirmé par Wikipédia FR (absent de Wikidata) | — | sensible |
 | Gérard Depardieu | Condamné | Confirmé par Wikidata | agression sexuelle (2025) | sensible, verifier |
